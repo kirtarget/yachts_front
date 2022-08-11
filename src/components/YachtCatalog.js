@@ -94,25 +94,30 @@ const YachtCatalog = (props) => {
       __v: 0,
     },
   ])
+
+  const instance = axios.create({
+    baseURL: "https://yachts-back.herokuapp.com",
+  })
+
   const [isFetching, setIsFetching] = useState(true)
   const getYachtsHTTP = async () => {
     try {
-      const yachts = await axios.get("http://localhost:3100/api/yachts")
+      const yachts = await axios.get("/api/yachts")
       setYachtsList(yachts.data)
     } catch (error) {
       console.log(error.message)
     }
   }
   const getLocations = async () => {
-    const location = await axios.get("http://localhost:3100/api/locations")
+    const location = await axios.get("/api/locations")
     setLocations(location.data)
   }
   const getRegion = async () => {
-    const region = await axios.get("http://localhost:3100/api/region")
+    const region = await axios.get("/api/region")
     setRegions(region.data)
   }
   const getCountries = async () => {
-    const countries = await axios.get("http://localhost:3100/api/country")
+    const countries = await axios.get("/api/country")
     setCountries(countries.data)
   }
   useEffect(() => {
