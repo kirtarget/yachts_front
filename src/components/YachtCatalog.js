@@ -102,22 +102,22 @@ const YachtCatalog = (props) => {
   const [isFetching, setIsFetching] = useState(true)
   const getYachtsHTTP = async () => {
     try {
-      const yachts = await axios.get("/api/yachts")
+      const yachts = await instance.get("/api/yachts")
       setYachtsList(yachts.data)
     } catch (error) {
       console.log(error.message)
     }
   }
   const getLocations = async () => {
-    const location = await axios.get("/api/locations")
+    const location = await instance.get("/api/locations")
     setLocations(location.data)
   }
   const getRegion = async () => {
-    const region = await axios.get("/api/region")
+    const region = await instance.get("/api/region")
     setRegions(region.data)
   }
   const getCountries = async () => {
-    const countries = await axios.get("/api/country")
+    const countries = await instance.get("/api/country")
     setCountries(countries.data)
   }
   useEffect(() => {
