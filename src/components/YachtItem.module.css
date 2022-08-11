@@ -1,0 +1,31 @@
+.mainpage__card {
+  min-width: 500px;
+  @apply grid  grid-cols-6  mx-10 my-5 shadow-md  bg-white lg:h-3/6 md:h-64  rounded-xl place-content-center;
+}
+.mainpage__image {
+  @apply row-span-6 col-span-4 overflow-hidden  rounded-xl items-center;
+}
+.mainpage__card span {
+  @apply text-base font-semibold text-slate-700;
+}
+
+.mainpage__image img {
+  @apply w-full align-middle mx-auto;
+}
+
+.mainpage__cardlist {
+  @apply container mx-auto;
+}
+
+.mainpage__name {
+  @apply text-2xl col-span-2 font-black text-neutral-50 bg-green-500 absolute px-3 drop-shadow-sm rounded-tl-lg;
+}
+.mainpage__location {
+  @apply text-xs col-span-2 mb-4;
+}
+.mainpage__location__country {
+  @apply text-lg font-bold col-span-2 mb-4;
+}
+.mainpage__location__region {
+  @apply text-xs col-span-2 mb-4;
+}
