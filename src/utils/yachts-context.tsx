@@ -1,4 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
+import axios from "axios"
+import { useEffect } from "react"
+import useFetch from "../hooks/useFetch"
 export type ContextType = {
   yachts: {
     id: number
@@ -6,11 +9,12 @@ export type ContextType = {
     buildYear: number
     locationId: number
     mainPictureUrl: string
+    isFetching: boolean
   }
 }
 
 const YachtContext = React.createContext({
-  yachts: [
+  yachtsList: [
     {
       _id: "62ccd1768b7729215281a176",
       buildYear: 2003,
@@ -59,7 +63,24 @@ const YachtContext = React.createContext({
       __v: 0,
     },
   ],
-  setCountries: () => {},
+  isFetching: false,
 })
+
+export const YachtContextProvider = (props: any) => {
+  const { locations, yachtsList, countries, regions, isFetching, getData } =
+    useFetch()
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  return (
+    <YachtContext.Provider
+      value={{ locations, yachtsList, countries, regions, isFetching }}
+    >
+      {props.children}
+    </YachtContext.Provider>
+  )
+}
 
 export default YachtContext

@@ -1,39 +1,63 @@
 import YachtItem from "./YachtItem"
-import { useEffect } from "react"
+import { useEffect, useState, useContext } from "react"
 import useFetch from "../hooks/useFetch"
+import YachtFullCard from "./YachtFullCard"
+import { Route, Link } from "wouter"
+import YachtContext from "../utils/yachts-context"
 
-const YachtCatalog = () => {
-  const { yachtsList, locations, countries, regions, isFetching, getData } =
-    useFetch()
+type CatalogProps = {
+  yachtsList: any
+  locations: any
+  countries: any
+  regions: any
+  isFetching: boolean
+}
 
-  useEffect(() => {
-    getData()
-  }, [])
+const YachtCatalog = (props: any) => {
+  const ctx = useContext(YachtContext)
+  const [isCardShown, setIsCardShown] = useState(false)
+  const [selectedYacht, setSelectedYacht] = useState(0)
 
-  let filteredList = yachtsList
+  const onSelectHandler = (id: number) => {
+    setSelectedYacht(id)
+    setIsCardShown(true)
+  }
 
-  if (isFetching) return <div>Загрузка...</div>
+  let filteredList = props.data.yachtsList
+
+  if (props.data.isFetching) return <div>Загрузка...</div>
 
   return (
     <div>
-      {filteredList.map((yacht) => {
-        let [locationProp] = locations.filter((l) => yacht.locationId === l.id)
-        let [regionProp] = regions.filter((r) => locationProp.regionId === r.id)
-        let [countryProp] = countries.filter(
-          (c) => regionProp.countryId === c.id
-        )
-        return (
-          <YachtItem
-            key={yacht.id}
-            name={yacht.name}
-            buildYear={yacht.buildYear}
-            location={locationProp.name.textRU}
-            img={yacht.mainPictureUrl}
-            region={regionProp.name.textRU}
-            country={countryProp.name.textRU}
-          />
-        )
-      })}
+      {isCardShown ? (
+        <YachtFullCard yachtsList={props.data.yachtsList} />
+      ) : (
+        filteredList.map((yacht: any) => {
+          let [locationProp] = props.data.locations.filter(
+            (l: any) => yacht.locationId === l.id
+          )
+          let [regionProp] = props.data.regions.filter(
+            (r: any) => locationProp.regionId === r.id
+          )
+          let [countryProp] = props.data.countries.filter(
+            (c: any) => regionProp.countryId === c.id
+          )
+          return (
+            <Link key={yacht.id} href={`/yachts/${yacht.id}`}>
+              <YachtItem
+                onClick={onSelectHandler.bind(yacht.id)}
+                id={yacht.id}
+                name={yacht.name}
+                buildYear={yacht.buildYear}
+                location={locationProp.name.textRU}
+                img={yacht.mainPictureUrl}
+                region={regionProp.name.textRU}
+                country={countryProp.name.textRU}
+              />
+            </Link>
+          )
+        })
+      )}
     </div>
   )
 }

@@ -6,7 +6,7 @@ import YachtContext from "../utils/yachts-context"
 function useFetch() {
   const ctx = useContext(YachtContext)
 
-  const [yachtsList, setYachtsList] = useState(ctx.yachts)
+  const [yachtsList, setYachtsList] = useState(ctx.yachtsList)
   const [locations, setLocations] = useState(ctx.locations)
   const [countries, setCountries] = useState(ctx.countries)
   const [regions, setRegions] = useState(ctx.regions)
