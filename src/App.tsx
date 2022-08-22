@@ -1,10 +1,9 @@
 import { Route } from "wouter"
-import "./App.css"
 
-import YachtContext, { YachtContextProvider } from "./utils/yachts-context"
-import { ContextType } from "./utils/yachts-context"
+import { YachtContextProvider } from "./utils/yachts-context"
+
 import YachtCatalog from "./components/YachtCatalog"
-import { useContext, useEffect } from "react"
+import { useEffect } from "react"
 import YachtFullCard from "./components/YachtFullCard"
 import useFetch from "./hooks/useFetch"
 

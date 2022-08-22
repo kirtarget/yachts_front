@@ -1,8 +1,7 @@
 import YachtItem from "./YachtItem"
-import { useEffect, useState, useContext } from "react"
-import useFetch from "../hooks/useFetch"
+import { useState, useContext } from "react"
 import YachtFullCard from "./YachtFullCard"
-import { Route, Link } from "wouter"
+import { Link } from "wouter"
 import YachtContext from "../utils/yachts-context"
 
 type CatalogProps = {
